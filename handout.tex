@@ -27,7 +27,7 @@
     {\Large Time Complexity Worksheet} \\[12pt]
     {\small September 23, 2025}
 \end{center}
-\vspace{2em}
+\vspace{3em}
 
 
 \begin{enumerate}[label=\textbf{\arabic*.}]
@@ -47,13 +47,17 @@ for i in range(1, n+1):
     \vspace{2.5cm}
 
     \item A programmer writes:
-    \begin{minted}[frame=single,framesep=10pt]{{python}
+    \begin{minted}[frame=single,framesep=10pt]{python}
 i = 1
 while i <= n:
     i = i * 3
     \end{minted}
     How many times does the loop run? State the time complexity.  
     \vspace{2.5cm}
+
+    \item You are asked to check if a number $n$ is prime by dividing it by all integers up to $\sqrt{n}$.  
+    What is the time complexity? 
+    \vspace{2cm}
 
     \item Consider the following:
     \begin{minted}[frame=single,framesep=10pt]{python}
@@ -62,12 +66,8 @@ for i in range(1, n+1):
     while j > 0:
         j = j // 2
     \end{minted}
-    Estimate the time complexity of this program.  
+    Estimate the time complexity of this program.
     \vspace{2.5cm}
-
-    \item You are asked to check if a number $n$ is prime by dividing it by all integers up to $\sqrt{n}$.  
-    What is the time complexity?  
-    \vspace{2cm}
 
     \item A system processes $m$ queries, and each query takes $O(\log n)$ time.  
     What is the total time complexity in terms of $m$ and $n$?  
@@ -80,14 +80,14 @@ for i in range(1, n+1):
         print(i, j)
     \end{minted}
     How many times does \texttt{print} run? State the time complexity.  
-    \vspace{2.5cm}
+    \vspace{8.5cm}
 
     \item Consider this loop:
     \begin{minted}[frame=single,framesep=10pt]{python}
 i = n
 while i > 0:
     i = i // 2
-    \end{minted}[frame=single,framesep=10pt]{python}
+    \end{minted}
     How many iterations occur? Give the time complexity.  
     \vspace{2.5cm}
 
@@ -99,7 +99,7 @@ def f(n):
     f(n-1)
     f(n-1)
     \end{minted}
-    Derive the recurrence relation and solve for its time complexity.  
+    Solve for its time complexity.  
     \vspace{2.5cm}
 
     \item Finally, consider:
@@ -109,7 +109,46 @@ for i in range(1, n+1):
         print(i, j)
     \end{minted}
     How many times does \texttt{print} run? Give the overall time complexity.  
-    \vspace{2.5cm}
+    \vspace{4.5cm}
+
+        \item Farmer John lines up his $n$ cows, each with an ID number.  
+    He wants to check every possible pair of cows $(i,j)$ with $i < j$, 
+    and for each pair, he compares their IDs digit by digit. 
+    Each ID has at most $\log n$ digits.  
+
+    Write the time complexity of his process in terms of $n$.  
+    \vspace{3cm}
+
+    % \item Farmer John notices his cows sometimes form groups.  
+    % For every integer $k$ from $1$ to $n$, he checks all multiples of $k$ up to $n$.  
+    % (That is, for each $k$, he runs a loop over $k, 2k, 3k, \dots \leq n$.)  
+
+    % What is the total running time across all values of $k$?
+
+    \item Farmer John lines up $n$ cows, each labeled with a unique number from $1$ to $n$. He notices that his cows can be arranged into groups: for each integer $k$ from $1$ to $n$, there is a group consisting of all cows whose labels are multiples of $k$.
+    \\
+
+    Farmer John carefully lists every cow in every group, going group by group. A cow may appear in multiple groups, and each appearance is counted separately.
+    \\
+    
+    How many total listings does Farmer John make across all groups?
+    \vspace{3cm}
+
+    \item Farmer John defines a recursive function on his farm:  
+    \begin{minted}[frame=single,framesep=10pt]{python}
+def FJ(n):
+    if n <= 1:
+        return
+    for i in range(1, n+1):
+        pass   # constant work
+    FJ(n//2)
+    FJ(n//2)
+    \end{minted}
+    Solve for the time complexity.  
+    \vspace{3cm}
+
+    % Sreyas hypothesis: n (log n)^2
+
 \end{enumerate}
 
 \end{document}
