@@ -1,8 +1,11 @@
-\documentclass[12pt]{article}
+}\documentclass[12pt]{article}
 \usepackage{amsmath, amssymb}
 \usepackage{geometry}
 \usepackage{enumitem}
 \usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+
 \geometry{letterpaper, margin=1in}
 
 \usepackage{minted}
@@ -21,131 +24,10 @@
 
 \begin{document}
 
-\begin{center}
-    {\small \textbf{IA Competitive Programming Club}} \\[6pt]
-    {\Large Time Complexity Worksheet} \\[12pt]
-    {\small September 23, 2025}
-\end{center}
-\vspace{2em}
+\section*{Worked Solutions}
 
-\begin{enumerate}[label=\textbf{\arabic*.}]
-    \item You are asked to sum the elements of an array of size $n$ by scanning it once.  
-    What is the time complexity?  
-    \vspace{2cm}
 
-    \item You are given the following code:
-        
-        \begin{minted}[frame=single,framesep=10pt]{python}
-for i in range(1, n+1):
-    for j in range(1, n+1):
-        print(i, j)
-        \end{minted}
-        
-    How many times does \texttt{print} execute? State the time complexity.  
-    \vspace{2.5cm}
-
-    \item A programmer writes:
-    \begin{minted}[frame=single,framesep=10pt]{python}
-i = 1
-while i <= n:
-    i = i * 3
-    \end{minted}
-    How many times does the loop run? State the time complexity.  
-    \vspace{2.5cm}
-
-    \item You are asked to check if a number $n$ is prime by dividing it by all integers up to $\sqrt{n}$.  
-    What is the time complexity? 
-    \vspace{2cm}
-
-    \item Consider the following:
-    \begin{minted}[frame=single,framesep=10pt]{python}
-for i in range(1, n+1):
-    j = i
-    while j > 0:
-        j = j // 2
-    \end{minted}
-    Estimate the time complexity of this program.
-    \vspace{2.5cm}
-
-    \item A system processes $m$ queries, and each query takes $O(\log n)$ time.  
-    What is the total time complexity in terms of $m$ and $n$?  
-    \vspace{2cm}
-
-    \item Analyze the following:
-    \begin{minted}[frame=single,framesep=10pt]{python}
-for i in range(1, n+1):
-    for j in range(1, i+1):
-        print(i, j)
-    \end{minted}
-    How many times does \texttt{print} run? State the time complexity.  
-    \vspace{8.5cm}
-
-    \item Consider this loop:
-    \begin{minted}[frame=single,framesep=10pt]{python}
-i = n
-while i > 0:
-    i = i // 2
-    \end{minted}
-    How many iterations occur? Give the time complexity.  
-    \vspace{2.5cm}
-
-    \item A recursive function is written as:
-    \begin{minted}[frame=single,framesep=10pt]{python}
-def f(n):
-    if n == 1:
-        return
-    f(n-1)
-    f(n-1)
-    \end{minted}
-    Solve for its time complexity.  
-    \vspace{2.5cm}
-
-    \item Finally, consider:
-    \begin{minted}[frame=single,framesep=10pt]{python}
-for i in range(1, n+1):
-    for j in range(1, int(sqrt(i))+1):
-        print(i, j)
-    \end{minted}
-    How many times does \texttt{print} run? Give the overall time complexity.  
-    \vspace{4.5cm}
-
-    \item Farmer John lines up his $n$ cows, each with an ID number.  
-    He wants to check every possible pair of cows $(i,j)$ with $i < j$, 
-    and for each pair, he compares their IDs digit by digit. 
-    Each ID has at most $\log n$ digits.  
-
-    Write the time complexity of his process in terms of $n$.  
-    \vspace{3cm}
-
-    \item Farmer John lines up $n$ cows, each labeled with a unique number from $1$ to $n$. He notices that his cows can be arranged into groups: for each integer $k$ from $1$ to $n$, there is a group consisting of all cows whose labels are multiples of $k$.
-    \\
-
-    Farmer John carefully lists every cow in every group, going group by group. A cow may appear in multiple groups, and each appearance is counted separately.
-    \\
-    
-    How many total listings does Farmer John make across all groups?
-    \vspace{3cm}
-
-    \item Farmer John defines a recursive function on his farm:  
-    \begin{minted}[frame=single,framesep=10pt]{python}
-def FJ(n):
-    if n <= 1:
-        return
-    for i in range(1, n+1):
-        pass   # constant work
-    FJ(n//2)
-    FJ(n//2)
-    \end{minted}
-    Solve for the time complexity.  
-    \vspace{3cm}
-\end{enumerate}
-
-\newpage
-\section*{Worked Solutions — friendly, step by step}
-
-Below are longer, easy-to-follow explanations. For each problem I show the idea, a small example when helpful, and then the final answer.
-
-\begin{enumerate}[label=\textbf{\arabic*.}]
+\begin{enumerate}[label=\arabic*.]
 
 \item \textbf{What happens?} We go through the array from the first element to the last and add each number to a running total.
 
@@ -153,19 +35,19 @@ Below are longer, easy-to-follow explanations. For each problem I show the idea,
 
 \textbf{Small example:} If the array has 5 numbers, you do 5 additions.
 
-\textbf{Final answer:} The time grows roughly in proportion to $n$. Write it as \textbf{O(n)}.
+\textbf{Final answer:} The time grows roughly in proportion to $n$. Write it as $\boxed{O(n)}$.
 
----
+\hrulefill
 
-\item \textbf{What happens?} There are two loops: for each value of \texttt{i} (1 to $n$), you run the inner loop that does \texttt{n} prints. So for \texttt{i}=1 you do $n$ prints, for \texttt{i}=2$ you do $n$ prints, and so on.
+\item \textbf{What happens?} There are two loops: for each value of \texttt{i} (1 to $n$), you run the inner loop that does \texttt{n} prints. So for \texttt{i}=1 you do $n$ prints, for \texttt{i}=2 you do $n$ prints, and so on.
 
 \textbf{Counting:} How many prints total? It's $n$ (from the outer loop) times $n$ (from the inner loop) = $n \times n = n^2$ prints.
 
-\textbf{Small example:} If $n=3$, prints are: (i=1 -> 3 prints), (i=2 -> 3 prints), (i=3 -> 3 prints). Total = 9 = $3^2$.
+\textbf{Small example:} If $n=3$, prints are: (i=1 $\rightarrow$ 3 prints), (i=2 $\rightarrow$ 3 prints), (i=3 $\rightarrow$ 3 prints). Total = 9 = $3^2$.
 
-\textbf{Final answer:} \textbf{O(n\^2)} — the running time grows like the square of $n$.
+\textbf{Final answer:} The running time grows like the square of $n$. Write it as $\boxed{O(n^2)}$.
 
----
+\hrulefill
 
 \item \textbf{What happens?} You start at 1, then multiply by 3 each time: values go 1, 3, 9, 27, etc., until you pass $n$.
 
@@ -173,9 +55,9 @@ Below are longer, easy-to-follow explanations. For each problem I show the idea,
 
 \textbf{Small example:} If $n=27$, sequence is 1,3,9,27 — that's 4 steps (still small). If $n=81$, sequence is 1,3,9,27,81 — 5 steps.
 
-\textbf{Final answer:} The loop runs about \textbf{logarithmically} many times. Write it as \textbf{O(log n)}. (Base of log does not matter for big-picture.)
+\textbf{Final answer:} The loop runs about logarithmically many times. Write it as $\boxed{O(\log n)}$. (Base of log does not matter for big-picture.)
 
----
+\hrulefill
 
 \item \textbf{What happens?} To test if $n$ is prime in this simple method, you try dividing $n$ by every whole number from 2 up to the square root of $n$.
 
@@ -183,13 +65,13 @@ Below are longer, easy-to-follow explanations. For each problem I show the idea,
 
 \textbf{Small example:} If $n=49$, $\sqrt{n}=7$, check divisors 2..7. If none divide, 49 is prime (in this case 7 does, so it's not prime).
 
-\textbf{Final answer:} You do about $\sqrt{n}$ divisions, so the time is \textbf{O(sqrt(n))}.
+\textbf{Final answer:} You do about $\sqrt{n}$ divisions, so the time is $\boxed{O(\sqrt{n})}$.
 
----
+\hrulefill
 
 \item \textbf{What happens?} For each number $i$ from 1 to $n$, you set $j=i$ and then repeatedly divide $j$ by 2 until $j$ becomes 0. That inner process runs faster when $i$ is small and a little longer when $i$ is large.
 
-\textbf{How long for one $i$?} If $j$ starts at $i$, dividing by 2 repeatedly takes roughly how many times you can halve $i$ until it reaches 0. That number is about \textbf{log base 2 of $i$}. For example, if $i=8$ then sequence 8,4,2,1,0 — about 4 halvings.
+\textbf{How long for one $i$?} If $j$ starts at $i$, dividing by 2 repeatedly takes roughly how many times you can halve $i$ until it reaches 0. That number is about log base 2 of $i$. For example, if $i=8$ then sequence 8,4,2,1,0 — about 4 halvings.
 
 \textbf{Add them all up:} Now add the time for $i=1$, $i=2$, ..., $i=n$. That is:
 \[
@@ -199,25 +81,25 @@ Intuitively, that sum is roughly $n$ times the “average log,” which ends up 
 
 \textbf{Small illustration for $n=8$:}
 \begin{itemize}
-  \item i=1: inner steps = 0 or 1
-  \item i=2: inner steps = 1
-  \item i=3: inner steps = 2
-  \item i=4: inner steps = 2
-  \item i=5..8: inner steps = 3
+    \item i=1: inner steps = 0 or 1
+    \item i=2: inner steps = 1
+    \item i=3: inner steps = 2
+    \item i=4: inner steps = 2
+    \item i=5..8: inner steps = 3
 \end{itemize}
 Adding these gives a number that grows roughly like $n \log n$ when $n$ gets large.
 
-\textbf{Final answer:} \textbf{O(n log n)}.
+\textbf{Final answer:} $\boxed{O(n \log n)}$.
 
----
+\hrulefill
 
 \item \textbf{What happens?} You have $m$ separate queries. Each query takes time proportional to $\log n$.
 
 \textbf{Combine them:} Doing $m$ queries means you do $\log n$ work $m$ times, so total is $m \times \log n$.
 
-\textbf{Final answer:} \textbf{O(m log n)}.
+\textbf{Final answer:} $\boxed{O(m \log n)}$.
 
----
+\hrulefill
 
 \item \textbf{What happens?} The outer loop runs $i$ from 1 up to $n$. For each $i$, the inner loop prints $i$ times (from 1 to $i$).
 
@@ -231,35 +113,36 @@ There are $n/2$ pairs each summing about $n$, so the total is about $\frac{n}{2}
 
 \textbf{Small example:} If $n=4$, prints = 1+2+3+4 = 10, which is close to $4^2 =16$ (same growth type).
 
-\textbf{Final answer:} \textbf{O(n\^2)}.
+\textbf{Final answer:} $\boxed{O(n^2)}$.
 
----
+\hrulefill
 
 \item \textbf{What happens?} Start with $i=n$. Each step you replace $i$ by $i$ divided by 2. You stop when $i$ becomes 0.
 
 \textbf{How many steps?} Each step halves the value. So how many halvings until $n$ becomes 0? About the number of times you can divide by 2 until you reach 1 (and one more to reach 0). That number is roughly the logarithm of $n$ (base 2).
 
-\textbf{Small example:} If $n=16$ the sequence is 16,8,4,2,1,0 — about 5 steps, and log2(16)=4 (plus the final step to 0), so it's logarithmic.
+\textbf{Small example:} If $n=16$ the sequence is 16,8,4,2,1,0 — about 5 steps, and $\log_2(16)=4$ (plus the final step to 0), so it's logarithmic.
 
-\textbf{Final answer:} \textbf{O(log n)}.
+\textbf{Final answer:} $\boxed{O(\log n)}$.
 
----
+\hrulefill
 
 \item \textbf{What happens?} This function calls itself twice with the input reduced by 1 each time. That means each call spawns two more calls, then each of those spawns two more, and so on.
 
-\textbf{Why that explodes:} The number of calls doubles at each level. If you start at size $n$, after 1 level you have 2 calls, after 2 levels you have 4 calls, after $k$ levels you have $2^k$ calls. Since you need about $n$ levels to reach the base case (reduce to 1), you end up with about $2^{n}$ calls in total.
+\textbf{Why that increase rapidly:} The number of calls doubles at each level. If you start at size $n$, after 1 level you have 2 calls, after 2 levels you have 4 calls, after $k$ levels you have $2^k$ calls. Since you need about $n$ levels to reach the base case (reduce to 1), you end up with about $2^{n}$ calls in total.
 
 \textbf{Small example:} For $n=3$:
 \begin{itemize}
-  \item f(3) calls f(2) and f(2)
-  \item each f(2) calls f(1) and f(1)
-  \item f(1) returns immediately
+    \item $f(3)$ calls $f(2)$ and $f(2)$
+    \item each $f(2)$ calls $f(1)$ and $f(1)$
+    \item $f(1)$ returns immediately
 \end{itemize}
-Counting calls: f(3) = 1, two f(2) = 2, four f(1) = 4 → total 7 calls, which is close to $2^3 - 1 = 7$.
+Counting calls: $f(3) = 1$, two $f(2) = 2$, four $f(1) = 4$ $\rightarrow$ total 7 calls, which is close to $2^3 - 1 = 7$.
 
-\textbf{Final answer:} This is exponential time, \textbf{O(2^n)}.
 
----
+\textbf{Final answer:} This is exponential time, $\boxed{O(2^n)}$.
+
+\hrulefill
 
 \item \textbf{What happens?} For each $i$ from 1 to $n$ you run the inner loop about $\sqrt{i}$ times (because \texttt{int(sqrt(i))} is the limit).
 
@@ -267,16 +150,16 @@ Counting calls: f(3) = 1, two f(2) = 2, four f(1) = 4 → total 7 calls, which i
 
 \textbf{Rough bound idea:}
 \begin{itemize}
-  \item For the last half of the numbers, say from $n/2$ to $n$, each $\sqrt{i}$ is at least $\sqrt{n/2}$.
-  \item There are about $n/2$ numbers in that range, so their contribution alone is about $(n/2) \times \sqrt{n/2}$, which is a constant times $n^{3/2}$.
+    \item For the last half of the numbers, say from $n/2$ to $n$, each $\sqrt{i}$ is at least $\sqrt{n/2}$.
+    \item There are about $n/2$ numbers in that range, so their contribution alone is about $(n/2) \times \sqrt{n/2}$, which is a constant times $n^{3/2}$.
 \end{itemize}
 This shows the total behaves like $n^{1.5}$ (written as $n^{3/2}$).
 
 \textbf{Small example:} If $n=9$ then inner counts are (1,1,1,2,2,2,2,2,3) summing to 16. Compare with $9^{1.5} = 27$ — same growth trend for larger $n$.
 
-\textbf{Final answer:} \textbf{O(n^{3/2})} (also written O(n^{1.5})).
+\textbf{Final answer:} $\boxed{O(n^{3/2})}$ (also written $O(n^{1.5})$).
 
----
+\hrulefill
 
 \item \textbf{What happens?} Farmer John checks every unordered pair of cows and compares IDs digit-by-digit. Number of pairs and cost per pair both matter.
 
@@ -284,36 +167,36 @@ This shows the total behaves like $n^{1.5}$ (written as $n^{3/2}$).
 
 \textbf{How long per pair?} Comparing two IDs digit-by-digit takes time proportional to the number of digits per ID. The problem says each ID has up to about $\log n$ digits. (That notation means the number of digits grows slowly with $n$ — for example, if IDs are numbers up to $n$, digits are about log base 10 of $n$.)
 
-\textbf{Multiply:} Total time ≈ number of pairs × time per pair ≈ $n^2 \times \log n$.
+\textbf{Multiply:} Total time $\approx$ number of pairs $\times$ time per pair $\approx n^2 \times \log n$.
 
-\textbf{Final answer:} \textbf{O(n^2 log n)}.
+\textbf{Final answer:} $\boxed{O(n^2 \log n)}$.
 
----
+\hrulefill
 
 \item \textbf{What happens?} For each integer $k$ from 1 to $n$, Farmer John writes down the multiples of $k$ up to $n$: that is $k, 2k, 3k, \dots$. For $k$ fixed, how many multiples are there? About $n/k$ of them (because you can multiply $k$ by roughly $n/k$ to get up to $n$).
 
 \textbf{Add for all $k$:} Total listings = sum over $k$ of (about $n/k$). So:
 \[
-\text{total} \approx n \times (1 + 1/2 + 1/3 + \dots + 1/n).
+\text{total} \approx n \times \left(1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n}\right).
 \]
 The part in parentheses is the harmonic sum. It grows slowly; you can think of it like the number of times you can repeatedly double (it behaves like the logarithm). A simple intuitive fact: $1 + 1/2 + 1/3 + \dots + 1/n$ grows about like $\ln(n)$ (logarithm).
 
-\textbf{Conclusion:} Total ≈ $n \times \ln(n)$, written as \textbf{O(n log n)}.
+\textbf{Conclusion:} Total $\approx n \times \ln(n)$, written as $\boxed{O(n \log n)}$.
 
 \textbf{Extra intuition (doubling groups):}
 \begin{itemize}
-  \item There are $n$ numbers that are multiples of 1.
-  \item About $n/2$ numbers that are multiples of 2.
-  \item About $n/3$ multiples of 3, and so on.
-  \item The sum $n(1 + 1/2 + 1/3 + \dots)$ piles up but not as fast as $n^2$ — it's only $n$ times a slowly growing quantity.
+    \item There are $n$ numbers that are multiples of 1.
+    \item About $n/2$ numbers that are multiples of 2.
+    \item About $n/3$ multiples of 3, and so on.
+    \item The sum $n(1 + 1/2 + 1/3 + \dots)$ piles up but not as fast as $n^2$ — it's only $n$ times a slowly growing quantity.
 \end{itemize}
 
----
+\hrulefill
 
 \item \textbf{What happens?} The function does two things:
 \begin{enumerate}
-  \item it does a loop that performs about $n$ constant-time steps (the \texttt{for} loop), and then
-  \item it calls itself twice with half the size (that is, on $n/2$ and $n/2$).
+    \item it does a loop that performs about $n$ constant-time steps (the \texttt{for} loop), and then
+    \item it calls itself twice with half the size (that is, on $n/2$ and $n/2$).
 \end{enumerate}
 
 So the running time $T(n)$ satisfies the relation
@@ -322,35 +205,26 @@ T(n) \approx 2 \cdot T(n/2) + n.
 \]
 You can think of this as a tree of recursive calls:
 \begin{itemize}
-  \item At the top level we do $n$ work.
-  \item At the next level we have 2 calls, each doing about $n/2$ work inside their own loop, so the total at that level is $2 \times (n/2) = n$ work.
-  \item At the next level we have 4 calls doing $n/4$ each, total again $n$.
+    \item At the top level we do $n$ work.
+    \item At the next level we have 2 calls, each doing about $n/2$ work inside their own loop, so the total at that level is $2 \times (n/2) = n$ work.
+    \item At the next level we have 4 calls doing $n/4$ each, total again $n$.
 \end{itemize}
 This continues for about $\log_2 n$ levels (because we keep halving until the size becomes 1). Each level costs about $n$, and there are about $\log n$ levels.
 
-\textbf{Multiply:} $n$ work per level × about $\log n$ levels = \textbf{O(n log n)} total.
+\textbf{Multiply:} $n$ work per level $\times$ about $\log n$ levels = $\boxed{O(n \log n)}$ total.
 
 \textbf{Small example:} If $n=8$:
 \begin{itemize}
-  \item Level 0: one call does 8 work.
-  \item Level 1: two calls each do 4 work → total 8.
-  \item Level 2: four calls each do 2 work → total 8.
-  \item Level 3: eight calls each do 1 work → total 8.
+    \item Level 0: one call does 8 work.
+    \item Level 1: two calls each do 4 work $\rightarrow$ total 8.
+    \item Level 2: four calls each do 2 work $\rightarrow$ total 8.
+    \item Level 3: eight calls each do 1 work $\rightarrow$ total 8.
 \end{itemize}
-There are 4 levels (log2(8)=3 plus base), each level 8 work → about $8 \times 3$ or $8 \times 4$ depending on exact stopping — bottom line: proportional to $n \log n$.
+There are 4 levels ($\log_2(8)=3$ plus base), each level 8 work $\rightarrow$ about $8 \times 3$ or $8 \times 4$ depending on exact stopping — bottom line: proportional to $n \log n$.
 
-\textbf{Final answer:} \textbf{O(n log n)}.
+\textbf{} $\boxed{O(n \log n)}$.
 
 \end{enumerate}
 
 \bigskip
-\textbf{Very short tips for students}
-\begin{itemize}
-  \item \textbf{Linear} time (O(n)) means “touch every item once.”
-  \item \textbf{Quadratic} time (O(n^2)) often comes from nested loops that both go up to $n$.
-  \item \textbf{Logarithmic} time (O(log n)) comes from repeatedly dividing the problem size (like halving).
-  \item When you see sums (like adding costs for each $i$), try a small example to see the pattern, then generalize.
-  \item For recursion, draw a small recursion tree and count work level-by-level.
-\end{itemize}
-
 \end{document}
