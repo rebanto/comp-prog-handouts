@@ -1,0 +1,161 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor} % Useful for setting colors, though not used here, often good practice
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+    {\small \textbf{IA Competitive Programming Club}} \\[6pt]
+    {\Large Sets \& Maps Worksheet} \\[12pt]
+    {\small November 19, 2025}
+\end{center}
+
+\vspace{0.2em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% SECTION 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{1. Quick Checks}
+
+\begin{enumerate}[label=\textbf{1.\arabic*}.]
+
+\item Fill in the expected time (average case):
+$$
+\text{set.add: } \rule{2.5cm}{0.4pt}, \quad
+\text{(x in s): } \rule{2.5cm}{0.4pt}, \quad
+\text{dict lookup: } \rule{2.5cm}{0.4pt}.
+$$
+
+\item True or False: A set removes duplicates automatically. \quad
+\textbf{Circle: True \quad False}
+
+\item Circle all types that can be dictionary keys: \quad
+\textbf{int \quad str \quad tuple \quad list}
+
+\item Why can’t you index a Python list using values up to $10^{12}$?
+\vspace{0.1cm}
+\vspace{0.3cm} % Add some space after the line for better look
+
+\end{enumerate}
+
+\vspace{0.1em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% SECTION 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{2. Dry-Run Problems}
+
+\begin{enumerate}[label=\textbf{2.\arabic*}.]
+
+\item Predict the output:
+\begin{verbatim}
+s = set()
+for x in [10, 10, 3, 5, 3]:
+    s.add(x)
+print(len(s))
+\end{verbatim}
+Output: \rule{3cm}{0.4pt}
+
+\vspace{0.2cm}
+
+\item Predict the output:
+\begin{verbatim}
+m = {}
+m["a"] = 4
+m["b"] = 7
+m["a"] += 5
+print(m["a"], m.get("c", 0))
+\end{verbatim}
+Output: \rule{4cm}{0.4pt}
+
+\vspace{0.2cm}
+
+\item Predict the output:
+\begin{verbatim}
+nums = [5,1,5,8,8,8]
+freq = {}
+for x in nums:
+    freq[x] = freq.get(x, 0) + 1
+print(freq[5] + freq[8])
+\end{verbatim}
+Output: \rule{3cm}{0.4pt}
+
+\vspace{0.2cm}
+
+\item Predict the output:
+\begin{verbatim}
+A = set([2,4,6])
+B = set([4,2,6,6])
+print(A == B)
+\end{verbatim}
+Output: \rule{2cm}{0.4pt}
+
+\end{enumerate}
+
+\vspace{0.5em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% SECTION 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{3. Applied and Numerical Problems}
+
+\begin{enumerate}[label=\textbf{3.\arabic*}.]
+
+\item You insert $400{,}000$ distinct numbers into a set.
+There are $10{,}000$ buckets.
+What is the number of expected items per bucket? 
+
+\vspace{0.5cm}
+
+\item A dictionary \texttt{freq} stores word counts.
+If the most common word appears $6000$ times and the least appears once, what does:
+\begin{verbatim}
+max(freq.values()) - min(freq.values())
+\end{verbatim}
+produce?
+Answer: \rule{3cm}{0.4pt}
+
+\vspace{0.5cm}
+
+\item Write a one-line Python expression that prints the smallest value in a dictionary \texttt{price}:
+
+\vspace{0.5cm}
+
+\item A program performs $N$ membership checks on a set of size $N$.
+Expected total time (in $O$-notation):
+
+\vspace{0.5cm}
+
+\item Complete dictionary assignment and lookup:
+
+\begin{verbatim}
+m = {}      # keys up to 10^12
+
+def store(k, v):
+    _________________________
+
+def retrieve(k):
+    return m.get(k, ____)
+\end{verbatim}
+
+\vspace{0.5cm}
+
+\item Only $80{,}000$ integer keys (up to $10^{12}$) will be stored.
+Circle the best data structure:
+\\[6pt]
+\textbf{dict \quad list \quad array \quad set}
+
+Write one short reason:
+\vspace{0.1cm}
+
+\end{enumerate}
+
+
+\end{document}

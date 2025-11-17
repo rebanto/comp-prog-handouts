@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor} % Used for coloring solutions
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+    {\small \textbf{IA Competitive Programming Club}} \\[6pt]
+    {\Large \textbf{Sets \& Maps Worksheet - SOLUTIONS}} \\[12pt]
+    {\small November 19, 2025}
+\end{center}
+
+\hrule
+\vspace{0.5em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% SECTION 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{1. Quick Checks}
+\vspace{-0.5em}
+
+\begin{enumerate}[label=\textbf{1.\arabic*}.]
+
+\item Fill in the expected time (average case):
+$$
+\text{set.add: } \textcolor{blue}{\mathbf{O(1)}}, \quad
+\text{(x in s): } \textcolor{blue}{\mathbf{O(1)}}, \quad
+\text{dict lookup: } \textcolor{blue}{\mathbf{O(1)}}.
+$$
+
+\item True or False: A set removes duplicates automatically. \quad
+\textbf{Circle: \textcolor{blue}{\uwave{True}} \quad False}
+\vspace{0.3cm}
+
+\item Circle all types that can be dictionary keys: \quad
+\textbf{\textcolor{blue}{\uwave{int}} \quad \textcolor{blue}{\uwave{str}} \quad \textcolor{blue}{\uwave{tuple}} \quad list}
+\vspace{0.3cm}
+
+\item Why can’t you index a Python list using values up to $10^{12}$?
+\vspace{0.1cm}
+\textbf{\textcolor{blue}{List indices must be small, sequential integers starting from 0. The list would require an astronomical amount of memory ($10^{12}$ elements) which is impossible.}}
+\vspace{0.3cm}
+
+\end{enumerate}
+
+\hrule
+\vspace{0.5em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% SECTION 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{2. Dry-Run Problems}
+\vspace{-0.5em}
+
+\begin{enumerate}[label=\textbf{2.\arabic*}.]
+
+\item Predict the output:
+\begin{verbatim}
+s = set()
+for x in [10, 10, 3, 5, 3]:
+    s.add(x)
+print(len(s))
+\end{verbatim}
+Output: \textcolor{blue}{\mathbf{3}}
+\vspace{0.5cm}
+
+\item Predict the output:
+\begin{verbatim}
+m = {}
+m["a"] = 4
+m["b"] = 7
+m["a"] += 5
+print(m["a"], m.get("c", 0))
+\end{verbatim}
+Output: \textcolor{blue}{\mathbf{9\ 0}}
+\vspace{0.5cm}
+
+\item Predict the output:
+\begin{verbatim}
+nums = [5,1,5,8,8,8]
+freq = {}
+for x in nums:
+    freq[x] = freq.get(x, 0) + 1
+print(freq[5] + freq[8])
+\end{verbatim}
+Output: \textcolor{blue}{\mathbf{5}}
+\vspace{0.5cm}
+
+\item Predict the output:
+\begin{verbatim}
+A = set([2,4,6])
+B = set([4,2,6,6])
+print(A == B)
+\end{verbatim}
+Output: \textcolor{blue}{\mathbf{True}}
+\vspace{0.3cm}
+
+\end{enumerate}
+
+\hrule
+\vspace{0.5em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% SECTION 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{3. Applied and Numerical Problems}
+\vspace{-0.5em}
+
+\begin{enumerate}[label=\textbf{3.\arabic*}.]
+
+\item You insert $400{,}000$ distinct numbers into a set.
+There are $10{,}000$ buckets.
+What is the number of expected items per bucket?
+
+\vspace{0.1cm}
+\textbf{\textcolor{blue}{Answer: $400,000 / 10,000 = 40$}}
+\vspace{0.5cm}
+
+\item A dictionary \texttt{freq} stores word counts.
+If the most common word appears $6000$ times and the least appears once, what does:
+\begin{verbatim}
+max(freq.values()) - min(freq.values())
+\end{verbatim}
+produce?
+Answer: \textcolor{blue}{\mathbf{5999}}
+\vspace{0.5cm}
+
+\item Write a one-line Python expression that prints the smallest value in a dictionary \texttt{price}:
+\\ % Enforces a new line
+\texttt{\textcolor{blue}{print(min(price.values()))}}
+\vspace{0.5cm}
+
+\item A program performs $N$ membership checks on a set of size $N$.
+Expected total time (in $O$-notation):
+
+\vspace{0.1cm}
+\textbf{\textcolor{blue}{$O(N)$}}
+\vspace{0.5cm}
+
+\item Complete dictionary assignment and lookup:
+
+\begin{verbatim}
+m = {}      # keys up to 10^12
+
+def store(k, v):
+    m[k] = v
+
+def retrieve(k):
+    return m.get(k, None)
+\end{verbatim}
+\vspace{0.5cm}
+
+\item Only $80{,}000$ integer keys (up to $10^{12}$) will be stored.
+Circle the best data structure:
+\\[6pt]
+\textbf{\textcolor{blue}{\uwave{dict}} \quad list \quad array \quad set}
+
+Write one short reason:
+\vspace{0.1cm}
+\textbf{\textcolor{blue}{Only a dictionary allows efficient mapping (O(1) average time) for extremely large, sparse keys ($10^{12}$).}}
+
+\end{enumerate}
+
+\end{document}
