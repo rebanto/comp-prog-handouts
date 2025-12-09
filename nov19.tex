@@ -1,10 +1,24 @@
-\documentclass[11pt]{article}
-\usepackage[margin=0.7in]{geometry}
+\documentclass[12pt]{article}
 \usepackage{amsmath, amssymb}
+\usepackage{geometry}
 \usepackage{enumitem}
-\usepackage{xcolor} % Useful for setting colors, though not used here, often good practice
-\setlength{\parskip}{6pt}
+\usepackage{listings}
+\geometry{letterpaper, margin=1in}
+
+\usepackage{minted}
+
 \setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Listings setup
+\lstset{
+    basicstyle=\ttfamily\small,
+    frame=single,
+    numbers=none,
+    tabsize=4,
+    showstringspaces=false,
+    breaklines=true
+}
 
 \begin{document}
 
@@ -13,149 +27,93 @@
     {\Large Sets \& Maps Worksheet} \\[12pt]
     {\small November 19, 2025}
 \end{center}
+\vspace{0.5em}
 
-\vspace{0.2em}
+\begin{enumerate}[label=\textbf{\arabic*.}]
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% SECTION 1
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \item Fill in the expected time (average case):
+    $$
+    \texttt{set.add: } \rule{2.5cm}{0.4pt} \quad
+    \texttt{(x in s): } \rule{2.5cm}{0.4pt} \quad
+    \texttt{dict lookup: } \rule{2.5cm}{0.4pt}
+    $$
+    \vspace{0.2cm}
 
-\section*{1. Quick Checks}
+    \item If you declare \texttt{my\_set = \{1, 1, 2, 2, 3\}}, duplicates will be automatically removed. Circle one of the following.
+    \begin{center}\textbf{True \quad False}\end{center}
 
-\begin{enumerate}[label=\textbf{1.\arabic*}.]
+    \item Circle all types that can be dictionary keys: \quad
+    \texttt{int \quad str \quad tuple \quad list}
+    \vspace{0.5cm}
 
-\item Fill in the expected time (average case):
-$$
-\text{set.add: } \rule{2.5cm}{0.4pt}, \quad
-\text{(x in s): } \rule{2.5cm}{0.4pt}, \quad
-\text{dict lookup: } \rule{2.5cm}{0.4pt}.
-$$
-
-\item True or False: A set removes duplicates automatically. \quad
-\textbf{Circle: True \quad False}
-
-\item Circle all types that can be dictionary keys: \quad
-\textbf{int \quad str \quad tuple \quad list}
-
-\item Why can’t you index a Python list using values up to $10^{12}$?
-\vspace{0.1cm}
-\vspace{0.3cm} % Add some space after the line for better look
+    \item For a map \texttt{m}, what is the difference between using \texttt{m.get(-)} and \texttt{m[-]}?
+    \vspace{0.5cm}
 
 \end{enumerate}
 
-\vspace{0.1em}
+\begin{enumerate}[label=\textbf{\arabic*.}, start=5, itemsep=1cm]
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% SECTION 2
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{2. Dry-Run Problems}
-
-\begin{enumerate}[label=\textbf{2.\arabic*}.]
-
-\item Predict the output:
-\begin{verbatim}
+    \item Predict the output:
+    \begin{minted}[frame=single,framesep=10pt]{python}
 s = set()
 for x in [10, 10, 3, 5, 3]:
     s.add(x)
 print(len(s))
-\end{verbatim}
-Output: \rule{3cm}{0.4pt}
+    \end{minted}
+    Output: \rule{3cm}{0.4pt}  
 
-\vspace{0.2cm}
-
-\item Predict the output:
-\begin{verbatim}
+    \item Predict the output:
+    \begin{minted}[frame=single,framesep=10pt]{python}
 m = {}
 m["a"] = 4
 m["b"] = 7
 m["a"] += 5
 print(m["a"], m.get("c", 0))
-\end{verbatim}
-Output: \rule{4cm}{0.4pt}
+    \end{minted}
+    Output: \rule{4cm}{0.4pt}  
 
-\vspace{0.2cm}
-
-\item Predict the output:
-\begin{verbatim}
+    \item Predict the output:
+    \begin{minted}[frame=single,framesep=10pt]{python}
 nums = [5,1,5,8,8,8]
 freq = {}
 for x in nums:
     freq[x] = freq.get(x, 0) + 1
 print(freq[5] + freq[8])
-\end{verbatim}
-Output: \rule{3cm}{0.4pt}
+    \end{minted}
+    Output: \rule{3cm}{0.4pt}  
 
-\vspace{0.2cm}
-
-\item Predict the output:
-\begin{verbatim}
+    \item Predict the output:
+    \begin{minted}[frame=single,framesep=10pt]{python}
 A = set([2,4,6])
 B = set([4,2,6,6])
 print(A == B)
-\end{verbatim}
-Output: \rule{2cm}{0.4pt}
+    \end{minted}
+    Output: \rule{2cm}{0.4pt}  
+    \vspace{1cm}
 
 \end{enumerate}
 
-\vspace{0.5em}
+\begin{enumerate}[label=\textbf{\arabic*.}, start=9]
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% SECTION 3
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \item You insert $400{,}000$ distinct numbers into a set.
+    There are $10{,}000$ buckets.
+    What is the number of expected items per bucket?  
+    \vspace{0.5cm}
 
-\section*{3. Applied and Numerical Problems}
-
-\begin{enumerate}[label=\textbf{3.\arabic*}.]
-
-\item You insert $400{,}000$ distinct numbers into a set.
-There are $10{,}000$ buckets.
-What is the number of expected items per bucket? 
-
-\vspace{0.5cm}
-
-\item A dictionary \texttt{freq} stores word counts.
-If the most common word appears $6000$ times and the least appears once, what does:
-\begin{verbatim}
+    \item A dictionary \texttt{freq} stores word counts.
+    If the most common word appears $6000$ times and the least appears once, what does the following produce?
+    \begin{minted}[frame=single,framesep=10pt]{python}
 max(freq.values()) - min(freq.values())
-\end{verbatim}
-produce?
-Answer: \rule{3cm}{0.4pt}
+    \end{minted}
+    Answer: \rule{3cm}{0.4pt}
+    \vspace{0.5cm}
 
-\vspace{0.5cm}
+    \item Write a one-line Python expression that prints the smallest value in a dictionary \texttt{price}:  
+    \vspace{0.5cm}
 
-\item Write a one-line Python expression that prints the smallest value in a dictionary \texttt{price}:
-
-\vspace{0.5cm}
-
-\item A program performs $N$ membership checks on a set of size $N$.
-Expected total time (in $O$-notation):
-
-\vspace{0.5cm}
-
-\item Complete dictionary assignment and lookup:
-
-\begin{verbatim}
-m = {}      # keys up to 10^12
-
-def store(k, v):
-    _________________________
-
-def retrieve(k):
-    return m.get(k, ____)
-\end{verbatim}
-
-\vspace{0.5cm}
-
-\item Only $80{,}000$ integer keys (up to $10^{12}$) will be stored.
-Circle the best data structure:
-\\[6pt]
-\textbf{dict \quad list \quad array \quad set}
-
-Write one short reason:
-\vspace{0.1cm}
+    \item A program performs $N$ membership checks on a set of size $N$, and then does the same on a list of the same size.  
+    What are the expected total times (in $O$-notation) for the set checks and for the list checks?
 
 \end{enumerate}
-
 
 \end{document}
