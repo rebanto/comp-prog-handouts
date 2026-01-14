@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in, right=1.5in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+\setlist[enumerate]{nosep}
+
+% Command to highlight answers
+\newcommand{\answer}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+    {\small \textbf{IA Competitive Programming Club}} \\
+    {\Large\textbf{Binary Search Worksheet -- SOLUTION KEY}} \\
+    {\small January 14, 2026}
+\end{center}
+
+\vspace{0.3cm}
+
+\textbf{Problem 1: Broken Binary Search}
+(a) Identify the bug: \answer{The update \texttt{l = mid} causes an infinite loop when \texttt{r = l + 1} and \texttt{A[l] < x}, because integer division \texttt{(l + r) / 2} stays at \texttt{l}.} \\
+(b) Concrete input: \answer{$A = [3, 10]$, $n=2$, $x=10$. Loop: $l=0, r=1, mid=0$. $A[0]<10$ sets $l=0$ forever.} \\
+(c) Corrected update step: \answer{Use \texttt{mid = l + (r - l + 1) / 2} (right-leaning mid) OR use \texttt{l = mid + 1} with \texttt{mid = (l + r) / 2}.}
+
+\textbf{Problem 2: Tracing a Non-Trivial Predicate}
+(a) Table for $f(i) = (i^2 + 3i + 1 \ge 50)$:
+\begin{center}
+\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+$i$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+$i^2 + 3i + 1$ & 1 & 5 & \answer{11} & \answer{19} & \answer{29} & \answer{41} & \answer{55} & \answer{71} \\ \hline
+$f(i)$ (T/F) & F & F & \answer{F} & \answer{F} & \answer{F} & \answer{F} & \answer{T} & \answer{T} \\ \hline
+\end{tabular}
+\end{center}
+(b) Why monotonic: \answer{The function $g(i) = i^2 + 3i + 1$ is strictly increasing for $i \ge 0$. If $g(k) \ge 50$, then $g(k+1)$ must also be $\ge 50$.} \\
+(c) Binary search: \answer{Check $mid$. If $f(mid)$ is false, the answer is in $[mid+1, r]$. If true, $mid$ is a candidate; search $[l, mid]$. Smallest $i$ is 6.}
+
+\textbf{Problem 3: Binary Search on Geometry}
+(a) Inequality: \answer{$r \le S/2$ (specifically $r \le 5$).} \\
+(b) Monotonicity: \answer{If a circle of radius $R$ fits, any circle with radius $r < R$ also fits. If $R$ fails, any $r > R$ also fails.} \\
+(c) Iterations: \answer{$\log_2(\frac{\text{Range}}{\text{Precision}}) = \log_2(\frac{5}{10^{-4}}) \approx \log_2(50000) \approx 16$ iterations. Usually, we do 100 for safety.}
+
+\textbf{Problem 4: Two Binary Searches}
+(a) First occurrence: \answer{Move \textbf{left} (set \texttt{r = mid}) to see if there is an earlier $x$.} \\
+(b) Last occurrence: \answer{Move \textbf{right} (set \texttt{l = mid}) to see if there is a later $x$.} \\
+(c) Why \texttt{std::lower\_bound}: \answer{It is heavily optimized, avoids off-by-one errors, and works on any partitioned range (not just for finding exact values).}
+
+\newpage
+
+\textbf{Problem 5: Minimizing the Worst Case}
+(a) Guess = 12: \answer{\texttt{[8, 3 | 5, 6 | 2, 7 | 4]} results in sums $[11, 11, 9, 4]$. This uses 4 subarrays. Since $4 > K$, this is \textbf{NOT} valid for $K=3$. We need a larger sum.}
+
+(b) Feasibility table ($K=3$):
+\begin{center}
+\begin{tabular}{|c|c|l|}
+\hline
+Guess & Feasible? & Reason/Partitions \\ \hline
+8 & \answer{No} & \answer{First element is 8; index 0 alone is 8. Sums exceed 8 immediately.} \\ \hline
+12 & \answer{No} & \answer{Requires 4 subarrays: [8,3], [5,6], [2,7], [4].} \\ \hline
+15 & \answer{Yes} & \answer{Possible in 3: [8,3], [5,6], [2,7,4] $\rightarrow$ sums 11, 11, 13.} \\ \hline
+\end{tabular}
+\end{center}
+
+(c) Greedy Check(X): \answer{Iterate through $A$, adding elements to a current sum. If adding $A[i]$ exceeds $X$, start a new subarray and increment a counter. If counter $\le K$ and no single $A[i] > X$, return true.}
+
+\textbf{Problem 6: Binary Search on Answer}
+(a) Tasks by machine $i$: \answer{$\lfloor T / t_i \rfloor$} \\
+(b) Total tasks: \answer{$g(T) = \sum_{i=1}^N \lfloor T / t_i \rfloor$} \\
+(c) Why not greedy: \answer{Machines work in parallel. A slower machine still contributes to the total count simultaneously with the faster ones. Choosing only the "best" ignores the aggregate throughput.}
+
+\textbf{Problem 7: Real-World Precision}
+\answer{Fixed iterations (e.g., 100) provide a guaranteed precision (approx $10^{-30}$) and avoid infinite loops caused by floating-point precision errors (where \texttt{l} and \texttt{r} never meet due to significand limits).}
+
+\vfill
+\hrule
+\begin{center}
+\textit{“Binary search is a proof technique disguised as an algorithm. If you can prove that $f(x)$ is true for all $x > k$ and false for all $x < k$, you have found your answer.”}
+\end{center}
+
+\end{document}

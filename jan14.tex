@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+
+% Keep your "padding" idea: tight everywhere, extra right margin
+\usepackage[margin=0.8in, right=1.5in]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{minted}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Worksheet-style lists (like your time complexity sheet)
+\setlist[enumerate]{label=\textbf{\arabic*.}, leftmargin=*, itemsep=1.0em}
+\setlist[enumerate,2]{label=(\alph*), leftmargin=*, itemsep=0.4em}
+
+\begin{document}
+
+\begin{center}
+    {\small \textbf{IA Competitive Programming Club}} \\[6pt]
+    {\Large \textbf{Binary Search Worksheet}} \\[10pt]
+    {\small December 14, 2026}
+\end{center}
+
+
+\textbf{Instructions:} These problems explore binary search as a \emph{monotonic reasoning tool}. Use the space provided for diagrams, logic, and pseudocode.
+
+\vspace{0.6em}
+
+\begin{enumerate}
+    \item \textbf{Broken Binary Search}
+
+    The following pseudocode is intended to find the first index $i$ such that $A[i] \ge x$ in a sorted array $A$.
+
+    \begin{minted}[frame=single, framesep=10pt]{python}
+l = 0
+r = n - 1
+while l < r:
+    mid = (l + r) // 2
+    if A[mid] < x:
+        l = mid
+    else:
+        r = mid
+return l
+    \end{minted}
+
+    \begin{enumerate}
+        \item Identify the bug (hint: think about infinite loops): \hrulefill
+        \item Provide a concrete input (array and $x$) where this code fails: \hrulefill
+        \item Write the corrected update step for \texttt{l} or \texttt{mid}:
+        \vspace{1.8em}
+    \end{enumerate}
+
+    \item \textbf{Tracing a Non-Trivial Predicate}
+
+    Define the predicate: $f(i) = (i^2 + 3i + 1 \ge 50)$.
+
+    \begin{enumerate}
+        \item Complete the table for $i = 0$ to $7$:
+        \begin{center}
+        \small
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        $i$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+        $i^2 + 3i + 1$ & 1 & 5 & & & & & & \\ \hline
+        $f(i)$ (T/F) & F & F & & & & & & \\ \hline
+        \end{tabular}
+        \end{center}
+
+        \item Explain why $f(i)$ is monotonic for $i \ge 0$: \hrulefill
+        \item How does binary search find the smallest $i$ where $f(i)$ is true?
+        \vspace{1.8em}
+    \end{enumerate}
+
+    \item \textbf{Binary Search on Geometry}
+
+    A square has side length $S = 10$. A circle with radius $r$ is centered inside.
+
+    \begin{enumerate}
+        \item Write the inequality for the circle to stay within the square: \hrulefill
+        \item Why is this problem monotonic regarding $r$? \hrulefill
+        \item If we need $r$ to 4 decimal places, how many iterations of binary search are needed?
+        \vspace{2.2em}
+    \end{enumerate}
+
+    \item \textbf{Two Binary Searches (First vs.\ Last)}
+
+    Array $A$ is sorted but contains duplicates (e.g., $[1, 2, 2, 2, 3]$).
+
+    \begin{enumerate}
+        \item To find the \textbf{first} occurrence of $x$, if \texttt{A[mid] == x}, which direction should you move?
+        \hrulefill
+
+        \item To find the \textbf{last} occurrence of $x$, if \texttt{A[mid] == x}, which direction should you move?
+        \hrulefill
+
+        \item Why is \texttt{std::lower\_bound} in C++ often preferred over a standard hand-written search?
+        \vspace{2.0em}
+    \end{enumerate}
+
+    \item \textbf{Minimizing the Worst Case (The ``Min-Max'' Problem)}
+
+    Array $A = [8, 3, 5, 6, 2, 7, 4]$ and $K = 3$.
+    Split $A$ into $K$ contiguous subarrays to minimize the maximum sum.
+
+    \begin{enumerate}
+        \item If our ``Guess'' for the max sum is \textbf{12}, can we partition the array? Show the groups: \\
+        \texttt{[ 8, 3 | 5, 6 | 2, 7 | 4 ]} $\rightarrow$ Is this valid for $K=3$? \hrulefill
+
+        \item Fill the feasibility table:
+        \begin{center}
+        \begin{tabular}{|c|c|c|}
+        \hline
+        Guess & Feasible (can split into $\le K$ groups)? & Reason/Partitions \\ \hline
+        8  & & \\ \hline
+        12 & & \\ \hline
+        15 & & \\ \hline
+        \end{tabular}
+        \end{center}
+
+        \item Describe the greedy \texttt{Check(X)} function used to verify if a sum $X$ is possible:
+    \end{enumerate}
+
+    \item \textbf{Binary Search on Answer (Machines and Tasks)}
+
+    $N$ machines exist. Machine $i$ takes $t_i$ minutes per task. You need $M$ tasks total.
+
+    \begin{enumerate}
+        \item If $T$ minutes pass, how many tasks does machine $i$ complete? \hrulefill
+        \item Define $g(T)$ as the total tasks completed by all machines in $T$ minutes:
+        \[
+            g(T) = \sum_{i=1}^N \left\lfloor \frac{T}{t_i} \right\rfloor
+        \]
+        \item Why can't we just pick the ``fastest'' machine and ignore others?
+    \end{enumerate}
+
+    \item \textbf{Real-World Precision}
+
+    When binary searching on floating point numbers (e.g., finding a square root), we often use a fixed number of iterations (like 100) instead of a \texttt{while (r - l > eps)} loop. Why?
+    \vspace{4.6em}
+\end{enumerate}
+
+\vfill
+\hrule
+\begin{center}
+\textit{``Binary search is a proof technique disguised as an algorithm. If you can prove that $f(x)$ is true for all $x > k$ and false for all $x < k$, you have found your answer.''}
+\end{center}
+
+\end{document}
